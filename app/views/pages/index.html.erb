@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+</style>
+
+</head>
+
+<body>
+  <div class="banner-error">
+    <div class="text-center">
+      <br>
+      <br>
+      <h3 style="text-align: center">Nicholas owe RM <%= @user_balance %></h3>
+    </div>
+  </div>
+
+    <div style="max-width: 700px; margin-left: auto; margin-right: auto;">
+        <table>
+        
+        <tr>
+            <th>No</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+        <% @payments.each.with_index(1) do |p, index| %>
+        <tr>
+            <td><%= index %></td>
+            <td><%= p.amount %></td>
+            <td><%= p.updated_at %></td>
+        </tr>
+        <% end %>
+        </table>
+    <a href="<%= access_payment_path %>" class="btn btn-dadida-primary text-uppercase">back</a>
+    </div>
+</body>
+
+</html>

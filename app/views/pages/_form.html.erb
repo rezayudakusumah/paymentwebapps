@@ -1,0 +1,12 @@
+<div>
+
+<%= form_tag(pages_path, :method => :get) do |f| %>
+  <div style="text-align: center;">
+    <%= text_field_tag :code %>
+  </div>
+  <div style="text-align: center; padding-top: 20px">
+    <%= submit_tag "Submit", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>
+
+</div>
