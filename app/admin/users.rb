@@ -1,14 +1,11 @@
 ActiveAdmin.register User do
 
-  permit_params :name, :identity_card, :address, :contact, :balance
-
   form do |f|
     inputs "Details" do
       input :name
       input :identity_card
       input :address
       input :contact
-      input :balance
     end
     actions
   end
@@ -20,7 +17,7 @@ ActiveAdmin.register User do
     after_action :random_code, only: :create
 
     def random_code
-      @random_digit = SecureRandom.hex(15)
+      @random_digit = SecureRandom.hex(3)
       User.where(id: @user.id).update(code: @random_digit)
     end
 

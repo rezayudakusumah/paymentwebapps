@@ -1,35 +1,28 @@
-ActiveAdmin.register Payment do
+ActiveAdmin.register Debt do
 
-  # permit_params :amount, :user_id
-  
   controller do
 
-    # def index
-    #   @payments = Payment.page(params[:page]).per(10)
-    # end
-
     def create
-      @payment = Payment.new(payment_params)
-  
-      if @payment.save
-        @user_id = @payment.user_id
+      @debt = Debt.new(debt_params)
+
+      if @debt.save
+        @user_id = @debt.user_id
         @debt_sum = Debt.where(user_id: @user_id).sum(:amount)
         @payment_sum = Payment.where(user_id: @user_id).sum(:amount)
-
         @total_balance = @debt_sum - @payment_sum
         User.where(id: @user_id).update(balance: @total_balance)
         flash[:info] = "Success created new data"
-        redirect_to admin_payment_path(@payment)
+        redirect_to admin_debt_path(@debt)
       else
         flash[:danger] = "Something went wrong"
       end
     end
 
     def update
-      @payment = Payment.find(params[:id])
+      @debt = Debt.find(params[:id])
 
-      if @payment.update(payment_params)
-        @user_id = @payment.user_id
+      if @debt.update(debt_params)
+        @user_id = @debt.user_id
         @debt_sum = Debt.where(user_id: @user_id).sum(:amount)
         @payment_sum = Payment.where(user_id: @user_id).sum(:amount)
 
@@ -37,7 +30,7 @@ ActiveAdmin.register Payment do
         User.where(id: @user_id).update(balance: @total_balance)
 
         flash[:info] = "Success updated data"
-        redirect_to admin_payment_path(@payment)
+        redirect_to admin_payment_path(@debt)
       else
         flash[:danger] = "Something went wrong"
       end
@@ -45,10 +38,10 @@ ActiveAdmin.register Payment do
     end
 
     def destroy
-      @payment = Payment.find(params[:id])
-      @payment.destroy
+      @debt = Debt.find(params[:id])
+      @debt.destroy
 
-      @user_id = @payment.user_id
+      @user_id = @debt.user_id
       @debt_sum = Debt.where(user_id: @user_id).sum(:amount)
       @payment_sum = Payment.where(user_id: @user_id).sum(:amount)
 
@@ -56,15 +49,15 @@ ActiveAdmin.register Payment do
       User.where(id: @user_id).update(balance: @total_balance)
       
       flash[:info] = "Success deleted data"
-      redirect_to admin_payments_path
+      redirect_to admin_debts_path
     end
 
     private
 
-    def payment_params
-      params.require(:payment).permit(:amount, :user_id)
+    def debt_params
+      params.require(:debt).permit(:amount, :user_id)
     end
 
   end
-
+  
 end

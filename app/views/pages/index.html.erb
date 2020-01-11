@@ -5,9 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
     table {
@@ -30,11 +27,11 @@
 </head>
 
 <body>
-  <div class="banner-error">
-    <div class="text-center">
+  <div>
+    <div>
       <br>
       <br>
-      <h3 style="text-align: center">Nicholas owe RM <%= @user_balance %></h3>
+      <h3 style="text-align: center"><%= @user_name %> owe RM <%= @user_balance %></h3>
     </div>
   </div>
 
@@ -56,7 +53,28 @@
         </tr>
         <% end %>
         </table>
-    <a href="<%= access_payment_path %>" class="btn btn-dadida-primary text-uppercase">back</a>
+
+    <br>
+    <br>
+    <br>
+    <h4 style="text-align: center">History of borrowing</h4>
+        <table>
+        
+        <tr>
+            <th>No</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+        <% @debts.each.with_index(1) do |d, index| %>
+        <tr>
+            <td><%= index %></td>
+            <td><%= d.amount %></td>
+            <td><%= d.updated_at %></td>
+        </tr>
+        <% end %>
+        </table>
+        <br>
+        <button href="<%= access_payment_path %>" type="button">back</button>
     </div>
 </body>
 
